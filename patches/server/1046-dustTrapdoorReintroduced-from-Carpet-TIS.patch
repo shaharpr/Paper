@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: shaharpr <51235978+shaharpr@users.noreply.github.com>
+Date: Thu, 15 Aug 2024 19:41:39 +0300
+Subject: [PATCH] dustTrapdoorReintroduced from Carpet TIS
+
+
+diff --git a/src/main/java/net/minecraft/world/level/block/RedStoneWireBlock.java b/src/main/java/net/minecraft/world/level/block/RedStoneWireBlock.java
+index c131734cad123a35456d18f8a161f77a4ac9ac99..aa4d46cc8ab67242d28f0f0766d8a2d96aba1e4f 100644
+--- a/src/main/java/net/minecraft/world/level/block/RedStoneWireBlock.java
++++ b/src/main/java/net/minecraft/world/level/block/RedStoneWireBlock.java
+@@ -173,7 +173,7 @@ public class RedStoneWireBlock extends Block {
+     @Override
+     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+         if (direction == Direction.DOWN) {
+-            return !this.canSurviveOn(world, neighborPos, neighborState) ? Blocks.AIR.defaultBlockState() : state;
++            return !(true) ? Blocks.AIR.defaultBlockState() : state; // Paper - dustTrapdoorReintroduced
+         } else if (direction == Direction.UP) {
+             return this.getConnectionState(world, state, pos);
+         } else {
+@@ -232,7 +232,7 @@ public class RedStoneWireBlock extends Block {
+         BlockState iblockdata = world.getBlockState(blockposition1);
+ 
+         if (flag) {
+-            boolean flag1 = iblockdata.getBlock() instanceof TrapDoorBlock || this.canSurviveOn(world, blockposition1, iblockdata);
++            boolean flag1 = false || this.canSurviveOn(world, blockposition1, iblockdata); // Paper - dustTrapdoorReintroduced
+ 
+             if (flag1 && RedStoneWireBlock.shouldConnectTo(world.getBlockState(blockposition1.above()))) {
+                 if (iblockdata.isFaceSturdy(world, blockposition1, direction.getOpposite())) {
